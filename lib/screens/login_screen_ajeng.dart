@@ -1,8 +1,55 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import '../services/firebase_service_kifiyah.dart';
+import 'home_screen_ajeng.dart';
 
-class LoginScreen_ajeng extends StatelessWidget {
+class LoginScreen_ajeng extends StatefulWidget {
   const LoginScreen_ajeng({super.key});
+
+  @override
+  State<LoginScreen_ajeng> createState() => _LoginScreen_ajengState();
+}
+
+class _LoginScreen_ajengState extends State<LoginScreen_ajeng> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  final FirebaseServiceKifiyah _firebaseService = FirebaseServiceKifiyah();
+
+  bool isLoading = false;
+
+  Future<void> loginUser() async {
+    String email = emailController.text.trim();
+    String password = passwordController.text.trim();
+
+    if (email.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("Email dan password wajib diisi")));
+      return;
+    }
+
+    setState(() => isLoading = true);
+
+    try {
+      await _firebaseService.signIn(email, password);
+
+      // Ambil NIM user (jika diperlukan)
+      String? nim = await _firebaseService.getNimByEmail(email);
+      print("NIM user: $nim");
+
+      if (!mounted) return;
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const HomeScreen_ajeng()),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Login gagal: $e")));
+    }
+
+    setState(() => isLoading = false);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +85,12 @@ class LoginScreen_ajeng extends StatelessWidget {
 
             const SizedBox(height: 40),
 
-            // Username
+            // Email
             TextField(
+              controller: emailController,
               decoration: InputDecoration(
                 prefixIcon: const Icon(Iconsax.user),
-                hintText: "Username",
+                hintText: "Email",
                 filled: true,
                 fillColor: Colors.white,
                 border: OutlineInputBorder(
@@ -56,6 +104,7 @@ class LoginScreen_ajeng extends StatelessWidget {
 
             // Password
             TextField(
+              controller: passwordController,
               obscureText: true,
               decoration: InputDecoration(
                 prefixIcon: const Icon(Iconsax.lock),
@@ -81,15 +130,17 @@ class LoginScreen_ajeng extends StatelessWidget {
                     borderRadius: BorderRadius.circular(14),
                   ),
                 ),
-                onPressed: () {},
-                child: const Text(
-                  "Login",
-                  style: TextStyle(
-                    fontFamily: "Sora",
-                    fontSize: 16,
-                    color: Colors.white,
-                  ),
-                ),
+                onPressed: isLoading ? null : loginUser,
+                child: isLoading
+                    ? const CircularProgressIndicator(color: Colors.white)
+                    : const Text(
+                        "Login",
+                        style: TextStyle(
+                          fontFamily: "Sora",
+                          fontSize: 16,
+                          color: Colors.white,
+                        ),
+                      ),
               ),
             ),
 
