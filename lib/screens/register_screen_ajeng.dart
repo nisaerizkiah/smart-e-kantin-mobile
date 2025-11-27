@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import '../models/user_model_kifiyah.dart';
-import '../services/firebase_service_kifiyah.dart';
+import '../services/firebase_services_kifiyah.dart';
 import 'login_screen_ajeng.dart';
 
 class RegisterScreen_ajeng extends StatefulWidget {
