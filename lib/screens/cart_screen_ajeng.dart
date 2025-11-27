@@ -36,8 +36,8 @@ class CartScreen_ajeng extends StatelessWidget {
                       final item = cart.items.values.toList()[index];
 
                       return ListTile(
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 8, horizontal: 12),
+                        contentPadding:
+                            const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                         title: Text(
                           item.name,
                           style: const TextStyle(

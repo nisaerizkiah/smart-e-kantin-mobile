@@ -42,11 +42,25 @@ class _RegisterScreen_ajengState extends State<RegisterScreen_ajeng> {
         MaterialPageRoute(builder: (_) => const LoginScreen_ajeng()),
       );
     } catch (e) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Pendaftaran gagal: $e")));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Pendaftaran gagal: $e")),
+      );
     }
 
     setState(() => isLoading = false);
+  }
+
+  InputDecoration inputStyle(String hint, IconData icon) {
+    return InputDecoration(
+      prefixIcon: Icon(icon),
+      hintText: hint,
+      filled: true,
+      fillColor: const Color(0xFFF3E9FF),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(14),
+        borderSide: BorderSide.none,
+      ),
+    );
   }
 
   @override
@@ -126,17 +140,7 @@ class _RegisterScreen_ajengState extends State<RegisterScreen_ajeng> {
                     // NIM
                     TextField(
                       controller: nimController,
-                      decoration: InputDecoration(
-                        prefixIcon: const Icon(Iconsax.card),
-                        hintText: "NIM",
-                        filled: true,
-                        fillColor: const Color(0xFFF3E9FF),
-                        borderRadius: BorderRadius.circular(14),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(14),
-                          borderSide: BorderSide.none,
-                        ),
-                      ),
+                      decoration: inputStyle("NIM", Iconsax.card),
                     ),
 
                     const SizedBox(height: 18),
@@ -144,17 +148,7 @@ class _RegisterScreen_ajengState extends State<RegisterScreen_ajeng> {
                     // EMAIL
                     TextField(
                       controller: emailController,
-                      decoration: InputDecoration(
-                        prefixIcon: const Icon(Iconsax.sms),
-                        hintText: "Email Kampus",
-                        filled: true,
-                        fillColor: const Color(0xFFF3E9FF),
-                        borderRadius: BorderRadius.circular(14),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(14),
-                          borderSide: BorderSide.none,
-                        ),
-                      ),
+                      decoration: inputStyle("Email", Iconsax.sms),
                     ),
 
                     const SizedBox(height: 18),
@@ -163,17 +157,7 @@ class _RegisterScreen_ajengState extends State<RegisterScreen_ajeng> {
                     TextField(
                       controller: passwordController,
                       obscureText: true,
-                      decoration: InputDecoration(
-                        prefixIcon: const Icon(Iconsax.lock),
-                        hintText: "Password",
-                        filled: true,
-                        fillColor: const Color(0xFFF3E9FF),
-                        borderRadius: BorderRadius.circular(14),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(14),
-                          borderSide: BorderSide.none,
-                        ),
-                      ),
+                      decoration: inputStyle("Password", Iconsax.lock),
                     ),
 
                     const SizedBox(height: 30),

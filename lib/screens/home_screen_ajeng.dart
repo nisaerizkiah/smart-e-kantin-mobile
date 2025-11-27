@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../providers/cart_provider_lilis.dart';
 import 'cart_screen_ajeng.dart';
 
 class HomeScreen_ajeng extends StatelessWidget {
-  const HomeScreen_ajeng({super.key});
+  HomeScreen_ajeng({super.key});  // <-- HAPUS const
 
-  // Data menu
   final List<Map<String, dynamic>> menuItems = [
     {"name": "Air Mineral", "image": "assets/images/air mineral.jpeg", "price": 5000},
     {"name": "Ayam Geprek", "image": "assets/images/ayam geprek.jpeg", "price": 15000},
