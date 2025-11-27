@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import '../services/firebase_services_kifiyah.dart';
 import 'home_screen_ajeng.dart';
+import 'register_screen_ajeng.dart'; // Tambahkan ini agar tombol Daftar berfungsi
 
 class LoginScreen_ajeng extends StatefulWidget {
   const LoginScreen_ajeng({super.key});
@@ -33,7 +34,7 @@ class _LoginScreen_ajengState extends State<LoginScreen_ajeng> {
     try {
       await _firebaseService.signIn(email, password);
 
-      // Ambil NIM user (jika diperlukan)
+      // Ambil NIM user (opsional)
       String? nim = await _firebaseService.getNimByEmail(email);
       print("NIM user: $nim");
 
@@ -55,106 +56,168 @@ class _LoginScreen_ajengState extends State<LoginScreen_ajeng> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF8F5FF),
-      body: Padding(
-        padding: const EdgeInsets.all(28),
+
+      body: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 80),
 
-            Text(
-              "E-Kantin",
-              style: TextStyle(
-                fontFamily: "Sora",
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-                color: Colors.deepPurple,
-              ),
-            ),
-
-            const SizedBox(height: 10),
-
-            Text(
-              "Masuk untuk melanjutkan",
-              style: TextStyle(
-                fontFamily: "Sora",
-                fontSize: 14,
-                color: Colors.black54,
-              ),
-            ),
-
-            const SizedBox(height: 40),
-
-            // Email
-            TextField(
-              controller: emailController,
-              decoration: InputDecoration(
-                prefixIcon: const Icon(Iconsax.user),
-                hintText: "Email",
-                filled: true,
-                fillColor: Colors.white,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(14),
-                  borderSide: BorderSide.none,
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 18),
-
-            // Password
-            TextField(
-              controller: passwordController,
-              obscureText: true,
-              decoration: InputDecoration(
-                prefixIcon: const Icon(Iconsax.lock),
-                hintText: "Password",
-                filled: true,
-                fillColor: Colors.white,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(14),
-                  borderSide: BorderSide.none,
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 30),
-
-            SizedBox(
+            //  HEADER 
+            Container(
+              height: 250,
               width: double.infinity,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.deepPurple,
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
-                  ),
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Color(0xFF6A1B9A), Color(0xFF8E24AA)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
                 ),
-                onPressed: isLoading ? null : loginUser,
-                child: isLoading
-                    ? const CircularProgressIndicator(color: Colors.white)
-                    : const Text(
-                        "Login",
-                        style: TextStyle(
-                          fontFamily: "Sora",
-                          fontSize: 16,
-                          color: Colors.white,
-                        ),
-                      ),
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(120),
+                  bottomRight: Radius.circular(120),
+                ),
+              ),
+              child: Center(
+                child: Icon(
+                  Icons.storefront_rounded,
+                  size: 90,
+                  color: Colors.white,
+                ),
               ),
             ),
 
             const SizedBox(height: 20),
 
-            Center(
-              child: Text(
-                "Belum punya akun? Daftar",
-                style: TextStyle(
-                  fontFamily: "Sora",
-                  fontSize: 13,
+            //  CARD LOGIN 
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(24),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(28),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.05),
+                      blurRadius: 10,
+                      offset: const Offset(0, 4),
+                    )
+                  ],
+                ),
+
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Welcome Back!",
+                      style: TextStyle(
+                        fontFamily: "Sora",
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.deepPurple,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      "Login to continue ordering",
+                      style: TextStyle(
+                        fontFamily: "Sora",
+                        fontSize: 14,
+                        color: Colors.black54,
+                      ),
+                    ),
+                    const SizedBox(height: 25),
+
+                    // EMAIL
+                    TextField(
+                      controller: emailController,
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(Iconsax.sms),
+                        hintText: "Email Kampus",
+                        filled: true,
+                        fillColor: const Color(0xFFF3E9FF),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(14),
+                          borderSide: BorderSide.none,
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 18),
+
+                    // PASSWORD
+                    TextField(
+                      controller: passwordController,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(Iconsax.lock),
+                        hintText: "Password",
+                        filled: true,
+                        fillColor: const Color(0xFFF3E9FF),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(14),
+                          borderSide: BorderSide.none,
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 30),
+
+                    // BUTTON LOGIN
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.deepPurple,
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(14),
+                          ),
+                        ),
+                        onPressed: isLoading ? null : loginUser,
+                        child: isLoading
+                            ? const CircularProgressIndicator(color: Colors.white)
+                            : const Text(
+                          "Login",
+                          style: TextStyle(
+                            fontFamily: "Sora",
+                            fontSize: 16,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 16),
+
+                    // DAFTAR (LINK)
+                    Center(
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const RegisterScreen_ajeng(),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          "Belum punya akun? Daftar",
+                          style: TextStyle(
+                            fontFamily: "Sora",
+                            fontSize: 14,
+                            color: Colors.deepPurple,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
                 ),
               ),
             ),
+
+            const SizedBox(height: 40),
           ],
         ),
       ),
