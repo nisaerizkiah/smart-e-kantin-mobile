@@ -16,7 +16,6 @@ class _RegisterScreen_ajengState extends State<RegisterScreen_ajeng> {
   final TextEditingController passwordController = TextEditingController();
 
   final FirebaseServiceKifiyah _firebaseService = FirebaseServiceKifiyah();
-
   bool isLoading = false;
 
   Future<void> registerUser() async {
@@ -57,7 +56,7 @@ class _RegisterScreen_ajengState extends State<RegisterScreen_ajeng> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            //  HEADER 
+            // HEADER
             Container(
               height: 250,
               width: double.infinity,
@@ -83,7 +82,7 @@ class _RegisterScreen_ajengState extends State<RegisterScreen_ajeng> {
 
             const SizedBox(height: 20),
 
-            //  CARD REGISTER 
+            // CARD REGISTER
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Container(
@@ -104,7 +103,7 @@ class _RegisterScreen_ajengState extends State<RegisterScreen_ajeng> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       "Daftar Akun",
                       style: TextStyle(
                         fontFamily: "Sora",
@@ -114,7 +113,7 @@ class _RegisterScreen_ajengState extends State<RegisterScreen_ajeng> {
                       ),
                     ),
                     const SizedBox(height: 4),
-                    Text(
+                    const Text(
                       "Buat akun untuk mulai memesan",
                       style: TextStyle(
                         fontFamily: "Sora",
@@ -132,6 +131,7 @@ class _RegisterScreen_ajengState extends State<RegisterScreen_ajeng> {
                         hintText: "NIM",
                         filled: true,
                         fillColor: const Color(0xFFF3E9FF),
+                        borderRadius: BorderRadius.circular(14),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(14),
                           borderSide: BorderSide.none,
@@ -141,7 +141,7 @@ class _RegisterScreen_ajengState extends State<RegisterScreen_ajeng> {
 
                     const SizedBox(height: 18),
 
-                    // EMAIL KAMPUS
+                    // EMAIL
                     TextField(
                       controller: emailController,
                       decoration: InputDecoration(
@@ -149,6 +149,7 @@ class _RegisterScreen_ajengState extends State<RegisterScreen_ajeng> {
                         hintText: "Email Kampus",
                         filled: true,
                         fillColor: const Color(0xFFF3E9FF),
+                        borderRadius: BorderRadius.circular(14),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(14),
                           borderSide: BorderSide.none,
@@ -167,6 +168,7 @@ class _RegisterScreen_ajengState extends State<RegisterScreen_ajeng> {
                         hintText: "Password",
                         filled: true,
                         fillColor: const Color(0xFFF3E9FF),
+                        borderRadius: BorderRadius.circular(14),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(14),
                           borderSide: BorderSide.none,
@@ -214,7 +216,7 @@ class _RegisterScreen_ajengState extends State<RegisterScreen_ajeng> {
                             ),
                           );
                         },
-                        child: Text(
+                        child: const Text(
                           "Sudah punya akun? Login",
                           style: TextStyle(
                             fontFamily: "Sora",
@@ -224,7 +226,7 @@ class _RegisterScreen_ajengState extends State<RegisterScreen_ajeng> {
                           ),
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),

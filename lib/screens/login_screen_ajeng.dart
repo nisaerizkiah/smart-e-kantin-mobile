@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import '../services/firebase_services_kifiyah.dart';
 import 'home_screen_ajeng.dart';
-import 'register_screen_ajeng.dart'; // Tambahkan ini agar tombol Daftar berfungsi
+import 'register_screen_ajeng.dart';
 
 class LoginScreen_ajeng extends StatefulWidget {
   const LoginScreen_ajeng({super.key});
@@ -24,8 +24,9 @@ class _LoginScreen_ajengState extends State<LoginScreen_ajeng> {
     String password = passwordController.text.trim();
 
     if (email.isEmpty || password.isEmpty) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text("Email dan password wajib diisi")));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Email dan password wajib diisi")),
+      );
       return;
     }
 
@@ -34,7 +35,7 @@ class _LoginScreen_ajengState extends State<LoginScreen_ajeng> {
     try {
       await _firebaseService.signIn(email, password);
 
-      // Ambil NIM user (opsional)
+      // Optional – ambil NIM user
       String? nim = await _firebaseService.getNimByEmail(email);
       print("NIM user: $nim");
 
@@ -45,8 +46,9 @@ class _LoginScreen_ajengState extends State<LoginScreen_ajeng> {
         MaterialPageRoute(builder: (_) => const HomeScreen_ajeng()),
       );
     } catch (e) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Login gagal: $e")));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Login gagal: $e")),
+      );
     }
 
     setState(() => isLoading = false);
@@ -60,8 +62,7 @@ class _LoginScreen_ajengState extends State<LoginScreen_ajeng> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-
-            //  HEADER 
+            // HEADER
             Container(
               height: 250,
               width: double.infinity,
@@ -76,7 +77,7 @@ class _LoginScreen_ajengState extends State<LoginScreen_ajeng> {
                   bottomRight: Radius.circular(120),
                 ),
               ),
-              child: Center(
+              child: const Center(
                 child: Icon(
                   Icons.storefront_rounded,
                   size: 90,
@@ -87,7 +88,7 @@ class _LoginScreen_ajengState extends State<LoginScreen_ajeng> {
 
             const SizedBox(height: 20),
 
-            //  CARD LOGIN 
+            // CARD LOGIN
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Container(
@@ -101,14 +102,13 @@ class _LoginScreen_ajengState extends State<LoginScreen_ajeng> {
                       color: Colors.black.withOpacity(0.05),
                       blurRadius: 10,
                       offset: const Offset(0, 4),
-                    )
+                    ),
                   ],
                 ),
-
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       "Welcome Back!",
                       style: TextStyle(
                         fontFamily: "Sora",
@@ -118,7 +118,7 @@ class _LoginScreen_ajengState extends State<LoginScreen_ajeng> {
                       ),
                     ),
                     const SizedBox(height: 4),
-                    Text(
+                    const Text(
                       "Login to continue ordering",
                       style: TextStyle(
                         fontFamily: "Sora",
@@ -126,6 +126,7 @@ class _LoginScreen_ajengState extends State<LoginScreen_ajeng> {
                         color: Colors.black54,
                       ),
                     ),
+
                     const SizedBox(height: 25),
 
                     // EMAIL
@@ -163,7 +164,7 @@ class _LoginScreen_ajengState extends State<LoginScreen_ajeng> {
 
                     const SizedBox(height: 30),
 
-                    // BUTTON LOGIN
+                    // LOGIN BUTTON
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
@@ -178,19 +179,19 @@ class _LoginScreen_ajengState extends State<LoginScreen_ajeng> {
                         child: isLoading
                             ? const CircularProgressIndicator(color: Colors.white)
                             : const Text(
-                          "Login",
-                          style: TextStyle(
-                            fontFamily: "Sora",
-                            fontSize: 16,
-                            color: Colors.white,
-                          ),
-                        ),
+                                "Login",
+                                style: TextStyle(
+                                  fontFamily: "Sora",
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                ),
+                              ),
                       ),
                     ),
 
                     const SizedBox(height: 16),
 
-                    // DAFTAR (LINK)
+                    // LINK DAFTAR
                     Center(
                       child: GestureDetector(
                         onTap: () {
@@ -201,7 +202,7 @@ class _LoginScreen_ajengState extends State<LoginScreen_ajeng> {
                             ),
                           );
                         },
-                        child: Text(
+                        child: const Text(
                           "Belum punya akun? Daftar",
                           style: TextStyle(
                             fontFamily: "Sora",
@@ -211,7 +212,7 @@ class _LoginScreen_ajengState extends State<LoginScreen_ajeng> {
                           ),
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),

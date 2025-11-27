@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/cart_provider_lilis.dart';
 import 'cart_screen_ajeng.dart';
 
 class HomeScreen_ajeng extends StatelessWidget {
   const HomeScreen_ajeng({super.key});
 
-  // Data menu (TIDAK pakai const agar tidak error)
+  // Data menu
   final List<Map<String, dynamic>> menuItems = [
     {"name": "Air Mineral", "image": "assets/images/air mineral.jpeg", "price": 5000},
     {"name": "Ayam Geprek", "image": "assets/images/ayam geprek.jpeg", "price": 15000},
@@ -20,6 +23,8 @@ class HomeScreen_ajeng extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cart = Provider.of<CartProvider_lilis>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("E-Kantin"),
@@ -41,10 +46,10 @@ class HomeScreen_ajeng extends StatelessWidget {
         padding: const EdgeInsets.all(12.0),
         child: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,          
-            crossAxisSpacing: 10,       
-            mainAxisSpacing: 10,        
-            childAspectRatio: 3/4,      
+            crossAxisCount: 2,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+            childAspectRatio: 3 / 4,
           ),
           itemCount: menuItems.length,
           itemBuilder: (context, index) {
@@ -57,11 +62,10 @@ class HomeScreen_ajeng extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  
-                  // Foto makanan
                   Expanded(
                     child: ClipRRect(
-                      borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+                      borderRadius:
+                          const BorderRadius.vertical(top: Radius.circular(12)),
                       child: Image.asset(
                         item["image"],
                         fit: BoxFit.cover,
@@ -69,7 +73,6 @@ class HomeScreen_ajeng extends StatelessWidget {
                     ),
                   ),
 
-                  // Nama makanan & harga
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
@@ -94,18 +97,29 @@ class HomeScreen_ajeng extends StatelessWidget {
                     ),
                   ),
 
-                  // Tombol tambah
                   SizedBox(
                     height: 40,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.deepPurple,
                         shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(bottom: Radius.circular(12)),
+                          borderRadius:
+                              BorderRadius.vertical(bottom: Radius.circular(12)),
                         ),
                       ),
                       onPressed: () {
-                        // TODO: logika keranjang
+                        cart.addToCart(
+                          item["name"],
+                          item["price"],
+                        );
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content:
+                                Text("${item["name"]} ditambahkan ke keranjang"),
+                            duration: const Duration(seconds: 1),
+                          ),
+                        );
                       },
                       child: const Text("Tambah"),
                     ),
