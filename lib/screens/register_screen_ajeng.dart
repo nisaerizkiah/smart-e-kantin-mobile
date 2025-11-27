@@ -36,7 +36,7 @@ class _RegisterScreen_ajengState extends State<RegisterScreen_ajeng> {
       // Simpan Firestore
       UserModelKifiyah user = UserModelKifiyah(
         userId: userCred.user!.uid,
-        fullname: nameC.text,
+        fullName: nameC.text,
         email: emailC.text,
         password: passC.text,
       );
