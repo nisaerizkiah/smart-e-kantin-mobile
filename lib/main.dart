@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+import 'package:provider/provider.dart';
 import 'services/firebase_services_kifiyah.dart';
 import 'providers/cart_provider_lilis.dart';
 
 // Screens
-import 'screens/login/login_screen_ajeng.dart';
-import 'screens/register/register_screen_ajeng.dart';
-import 'screens/home/home_screen_ajeng.dart';
-import 'screens/cart/cart_screen_ajeng.dart'; // <-- Tambahkan ini
+import 'screens/login_screen_ajeng.dart';
+import 'screens/register_screen_ajeng.dart';
+import 'screens/home_screen_ajeng.dart';
+import 'screens/cart_screen_ajeng.dart'; 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Smart E-Kantin',
-      debugShowCheckedModeBanner: false, // Hilangkan label DEBUG
+      debugShowCheckedModeBanner: false, 
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
         fontFamily: "Sora",
