@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/cart_provider_lilis.dart';
-// import '../widgets/cart_item_ajeng.dart';
 
 class CartScreen_ajeng extends StatelessWidget {
   const CartScreen_ajeng({super.key});
@@ -35,10 +34,24 @@ class CartScreen_ajeng extends StatelessWidget {
                     itemCount: cart.items.length,
                     itemBuilder: (context, index) {
                       final item = cart.items.values.toList()[index];
-                      return CartItem_ajeng(
-                        name: item.name,
-                        price: item.price,
-                        qty: item.qty,
+
+                      return ListTile(
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 8, horizontal: 12),
+                        title: Text(
+                          item.name,
+                          style: const TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                        subtitle: Text("Jumlah: ${item.qty}"),
+                        trailing: Text(
+                          "Rp ${item.price}",
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.deepPurple,
+                          ),
+                        ),
                       );
                     },
                   ),
