@@ -4,8 +4,8 @@ import 'cart_screen_ajeng.dart';
 class HomeScreen_ajeng extends StatelessWidget {
   const HomeScreen_ajeng({super.key});
 
-  // Data menu — kamu bisa pindahkan ke file terpisah nanti
-  final List<Map<String, dynamic>> menuItems = const [
+  // Data menu (TIDAK pakai const agar tidak error)
+  final List<Map<String, dynamic>> menuItems = [
     {"name": "Air Mineral", "image": "assets/images/air mineral.jpeg", "price": 5000},
     {"name": "Ayam Geprek", "image": "assets/images/ayam geprek.jpeg", "price": 15000},
     {"name": "Bakso", "image": "assets/images/bakso.jpeg", "price": 12000},
@@ -41,10 +41,10 @@ class HomeScreen_ajeng extends StatelessWidget {
         padding: const EdgeInsets.all(12.0),
         child: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,          // 2 kolom
-            crossAxisSpacing: 10,       // jarak horizontal
-            mainAxisSpacing: 10,        // jarak vertikal
-            childAspectRatio: 3/4,      // ukuran card
+            crossAxisCount: 2,          
+            crossAxisSpacing: 10,       
+            mainAxisSpacing: 10,        
+            childAspectRatio: 3/4,      
           ),
           itemCount: menuItems.length,
           itemBuilder: (context, index) {
@@ -105,7 +105,7 @@ class HomeScreen_ajeng extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        // nanti bisa dihubungkan ke keranjang
+                        // TODO: logika keranjang
                       },
                       child: const Text("Tambah"),
                     ),
