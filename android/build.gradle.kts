@@ -1,6 +1,10 @@
 // Top-level Gradle file: android/build.gradle.kts
 
 buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
     dependencies {
         // Plugin Google Services (Firebase)
         classpath("com.google.gms:google-services:4.3.15")
