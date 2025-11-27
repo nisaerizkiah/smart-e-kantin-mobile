@@ -56,11 +56,11 @@ flutter:
 
   # Tambahkan assets khusus Ajeng
   assets:
-    - assets/images/
+    - assets/images/ 
 
   # Tambahkan font Sora untuk UI Anggota 2
-  fonts:
+  fonts: 
     - family: Sora
       fonts:
-        - asset: assets/fonts/Sora-Regular.ttf
-        - asset: assets/fonts/Sora-Bold.ttf
+        - asset: assets/images/fonts/Sora-Regular.ttf
+        - asset: assets/images/fonts/Sora-Bold.ttf
